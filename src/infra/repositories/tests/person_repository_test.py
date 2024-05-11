@@ -2,7 +2,8 @@ from faker import Faker
 from sqlalchemy import text
 
 from src.infra.config import DBConnectionHandler
-from ..person_repository import PersonRepository, PersonData
+from ..person_repository import PersonRepository
+from src.domain.models import PersonData
 
 faker = Faker()
 person_repository = PersonRepository()

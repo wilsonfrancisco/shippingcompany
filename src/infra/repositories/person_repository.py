@@ -1,26 +1,12 @@
-from dataclasses import dataclass
-from collections import namedtuple
-
 from src.infra.config.db_config import DBConnectionHandler
 from src.infra.entities import Person
-
-
-@dataclass
-class PersonData:
-    """Person Data"""
-
-    tax_id_number: str
-    name: str
-    neighborhood: str
-    province: str
-    street: str
-    postal_code: str
+from src.domain.models import Person as PersonModel, PersonData
 
 
 class PersonRepository:
     """Person Repository"""
 
-    def add(self, data: PersonData) -> Person:
+    def add(self, data: PersonData) -> PersonModel:
         """Add a new person entity
         :param - tax_id_number
         :param - name
@@ -31,10 +17,6 @@ class PersonRepository:
 
         :return - Tuple with a new user
         """
-
-        added_data = namedtuple(
-            "User", "tax_id_number, name, neighborhood, province, street, postal_code"
-        )
 
         with DBConnectionHandler() as db_connection:
             try:
@@ -50,7 +32,7 @@ class PersonRepository:
                 db_connection.session.add(person)
                 db_connection.session.commit()
 
-                return added_data(
+                return PersonModel(
                     tax_id_number=data.tax_id_number,
                     name=data.name,
                     neighborhood=data.neighborhood,
