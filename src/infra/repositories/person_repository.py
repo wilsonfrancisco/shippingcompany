@@ -1,9 +1,10 @@
 from src.infra.config.db_config import DBConnectionHandler
+from src.data.interfaces import PersonRepositoryInterface
 from src.infra.entities import Person
 from src.domain.models import Person as PersonModel, PersonData
 
 
-class PersonRepository:
+class PersonRepository(PersonRepositoryInterface):
     """Person Repository"""
 
     def add(self, data: PersonData) -> PersonModel:
