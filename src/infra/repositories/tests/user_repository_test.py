@@ -65,3 +65,49 @@ class TestClassUserRepository:
                 raise
             finally:
                 connection.close()
+
+    def test_get_by_id(self):
+        """It should be able to get a user by an user id"""
+
+        person_data = PersonData(
+            tax_id_number=faker.word(),
+            name=faker.name(),
+            neighborhood=faker.word(),
+            province=faker.word(),
+            street=faker.word(),
+            postal_code=faker.word(),
+        )
+
+        person = person_repository.add(person_data)
+
+        user_data = UserData(
+            email=faker.email(),
+            password=faker.word(),
+            username=faker.name(),
+            person_tax_id=person.tax_id_number,
+        )
+
+        engine = db_connection_handler.get_engine()
+
+        data = user_repository.add(user_data)
+
+        with engine.connect() as connection:
+            try:
+                user = user_repository.get_by_id(data.id)
+
+                connection.execute(text(f"DELETE FROM users WHERE id = {user.id}"))
+
+                connection.execute(
+                    text(
+                        f"DELETE FROM people WHERE tax_id_number = '{person.tax_id_number}'"
+                    )
+                )
+
+                connection.commit()
+
+                assert user.id is not None
+            except:
+                connection.rollback()
+                raise
+            finally:
+                connection.close()

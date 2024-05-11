@@ -14,7 +14,7 @@ class UserRepository:
         :param - password: User password
         :param - tax_id_number: Person tax_id_number
 
-        :return
+        :return a new user
         """
         with DBConnectionHandler() as db_connection:
             try:
@@ -27,6 +27,33 @@ class UserRepository:
 
                 db_connection.session.add(user)
                 db_connection.session.commit()
+
+                return UserModel(
+                    id=user.id,
+                    username=user.username,
+                    email=user.email,
+                    password=user.password,
+                    person_tax_id=user.person_tax_id,
+                )
+            except:
+                db_connection.session.rollback()
+                raise
+            finally:
+                db_connection.session.close()
+
+    def get_by_id(self, user_id: int) -> UserModel:
+        """Get a user by passing it
+
+        :param - user_id: User identifier
+        :return: A user entity
+        """
+        with DBConnectionHandler() as db_connection:
+            try:
+                user = (
+                    db_connection.session.query(User)
+                    .filter_by(id=user_id)
+                    .one_or_none()
+                )
 
                 return UserModel(
                     id=user.id,
