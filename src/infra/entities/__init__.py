@@ -1,2 +1,2 @@
-from .people import Person
-from .users import User
+from .person import Person
+from .user import User

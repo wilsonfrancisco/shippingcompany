@@ -4,7 +4,7 @@ from src.infra.config import Base
 
 
 class Person(Base):
-    """Entidade Pessoas"""
+    """Person Entity"""
 
     __tablename__ = "people"
 
@@ -14,7 +14,7 @@ class Person(Base):
     province = Column(String(20), nullable=False)
     street = Column(String(50), nullable=False)
     postal_code = Column(String(10), nullable=False)
-    user_id = relationship("Users", uselist=False, back_populates="person")
+    user_id = relationship("User", uselist=False, back_populates="person")
 
     def __rep__(self):
         return f"Person: [name={self.name}]"
