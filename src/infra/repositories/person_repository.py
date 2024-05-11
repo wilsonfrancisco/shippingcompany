@@ -45,3 +45,21 @@ class PersonRepository:
                 raise
             finally:
                 db_connection.session.close()
+
+    def get_by_tax_id_number(self, tax_id_number: int = None):
+        """Get a person by tax id number
+        :param - tax_id_number
+        """
+
+        try:
+            with DBConnectionHandler() as db_connection:
+                return (
+                    db_connection.session.query(Person)
+                    .filter_by(tax_id_number=tax_id_number)
+                    .one()
+                )
+        except:
+            db_connection.session.rollback()
+            raise
+        finally:
+            db_connection.session.close()

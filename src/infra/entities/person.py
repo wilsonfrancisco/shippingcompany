@@ -18,3 +18,9 @@ class Person(Base):
 
     def __rep__(self):
         return f"Person: [name={self.name}]"
+
+    def __eq__(self, other):
+        if self.tax_id_number == other.tax_id_number:
+            return True
+
+        return False

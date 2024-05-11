@@ -17,3 +17,13 @@ class User(Base):
 
     def __rep__(self):
         return f"Usr: [username={self.username}, tax_id_number={self.person}]"
+
+    def __eq__(self, other):
+        if (
+            self.username == other.username
+            and self.email == other.email
+            and self.password == other.password
+        ):
+            return True
+
+        return False
