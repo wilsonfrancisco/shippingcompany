@@ -31,7 +31,7 @@ class TestClassPersonRepository:
 
         try:
             with engine.connect() as connection:
-                query_person = connection.execute(
+                query_result = connection.execute(
                     text(
                         f"""
                         SELECT tax_id_number
@@ -51,7 +51,7 @@ class TestClassPersonRepository:
 
                 connection.commit()
 
-                assert person.tax_id_number == query_person.tax_id_number
+                assert person.tax_id_number == query_result.tax_id_number
         except:
             connection.rollback()
             raise

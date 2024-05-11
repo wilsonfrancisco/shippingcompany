@@ -33,12 +33,12 @@ class PersonRepository:
                 db_connection.session.commit()
 
                 return PersonModel(
-                    tax_id_number=data.tax_id_number,
-                    name=data.name,
-                    neighborhood=data.neighborhood,
-                    province=data.province,
-                    street=data.street,
-                    postal_code=data.postal_code,
+                    tax_id_number=person.tax_id_number,
+                    name=person.name,
+                    neighborhood=person.neighborhood,
+                    province=person.province,
+                    street=person.street,
+                    postal_code=person.postal_code,
                 )
             except:
                 db_connection.session.rollback()
