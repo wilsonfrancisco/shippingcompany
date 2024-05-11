@@ -95,3 +95,64 @@ class TestClassPersonRepository:
             raise
         finally:
             connection.close()
+
+    def test_get_all(self):
+        """It should be able to get all people in the database"""
+
+        fst_person = PersonData(
+            tax_id_number=faker.word(),
+            name=faker.name(),
+            neighborhood=faker.word(),
+            province=faker.word(),
+            street=faker.word(),
+            postal_code=faker.word(),
+        )
+
+        snd_person = PersonData(
+            tax_id_number=faker.word(),
+            name=faker.name(),
+            neighborhood=faker.word(),
+            province=faker.word(),
+            street=faker.word(),
+            postal_code=faker.word(),
+        )
+
+        thrd_person = PersonData(
+            tax_id_number=faker.word(),
+            name=faker.name(),
+            neighborhood=faker.word(),
+            province=faker.word(),
+            street=faker.word(),
+            postal_code=faker.word(),
+        )
+
+        engine = db_connection_handler.get_engine()
+
+        person_repository.add(fst_person)
+        person_repository.add(snd_person)
+        person_repository.add(thrd_person)
+
+        number_of_added_people = 3
+
+        try:
+            with engine.connect() as connection:
+                people = person_repository.get_all()
+
+                connection.execute(
+                    text(
+                        f"""
+                        DELETE FROM people
+                        WHERE tax_id_number
+                        IN ('{fst_person.tax_id_number}', '{snd_person.tax_id_number}', '{thrd_person.tax_id_number}')
+                      """
+                    )
+                )
+
+                connection.commit()
+
+                assert len(people) == number_of_added_people
+        except:
+            connection.rollback()
+            raise
+        finally:
+            connection.close()

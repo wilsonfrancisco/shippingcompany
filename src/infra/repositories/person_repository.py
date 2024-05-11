@@ -63,3 +63,16 @@ class PersonRepository:
             raise
         finally:
             db_connection.session.close()
+
+    def get_all(self):
+        """Get all people"""
+        try:
+            with DBConnectionHandler() as db_connection:
+                data = db_connection.session.query(Person).all()
+
+            return data
+        except:
+            db_connection.session.rollback()
+            raise
+        finally:
+            db_connection.session.close()
