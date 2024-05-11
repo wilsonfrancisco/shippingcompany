@@ -42,7 +42,7 @@ class UserRepository:
                 db_connection.session.close()
 
     def get_by_id(self, user_id: int) -> UserModel:
-        """Get a user by passing it
+        """Get a user by passing the user id
 
         :param - user_id: User identifier
         :return: A user entity
@@ -52,6 +52,60 @@ class UserRepository:
                 user = (
                     db_connection.session.query(User)
                     .filter_by(id=user_id)
+                    .one_or_none()
+                )
+
+                return UserModel(
+                    id=user.id,
+                    username=user.username,
+                    email=user.email,
+                    password=user.password,
+                    person_tax_id=user.person_tax_id,
+                )
+            except:
+                db_connection.session.rollback()
+                raise
+            finally:
+                db_connection.session.close()
+
+    def get_by_username(self, username: str) -> UserModel:
+        """Get a user by passing the username
+
+        :param - username: The username
+        :return: A user entity
+        """
+        with DBConnectionHandler() as db_connection:
+            try:
+                user = (
+                    db_connection.session.query(User)
+                    .filter_by(username=username)
+                    .one_or_none()
+                )
+
+                return UserModel(
+                    id=user.id,
+                    username=user.username,
+                    email=user.email,
+                    password=user.password,
+                    person_tax_id=user.person_tax_id,
+                )
+            except:
+                db_connection.session.rollback()
+                raise
+            finally:
+                db_connection.session.close()
+
+    def get_by_email(self, email: str) -> UserModel:
+        """Get a user by passing the user email
+
+        :param - email: User email
+        :return: A user entity
+        """
+        with DBConnectionHandler() as db_connection:
+            try:
+                user = (
+                    db_connection.session.query(User)
+                    .filter_by(email=email)
                     .one_or_none()
                 )
 

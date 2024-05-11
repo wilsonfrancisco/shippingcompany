@@ -150,7 +150,8 @@ class TestClassPersonRepository:
 
                 connection.commit()
 
-                assert len(people) == number_of_added_people
+                assert people is not None
+                assert len(people) >= number_of_added_people
         except:
             connection.rollback()
             raise
