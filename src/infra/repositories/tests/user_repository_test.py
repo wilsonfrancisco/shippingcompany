@@ -20,12 +20,12 @@ class TestClassUserRepository:
         """It should be able to add a user"""
 
         person_data = PersonData(
-            tax_id_number=faker.word(),
+            tax_id_number=faker.ssn(),
             name=faker.name(),
-            neighborhood=faker.word(),
-            province=faker.word(),
-            street=faker.word(),
-            postal_code=faker.word(),
+            neighborhood=faker.city_suffix(),
+            province=faker.city(),
+            street=faker.street_suffix(),
+            postal_code=faker.postalcode(),
         )
 
         person = person_repository.add(person_data)
@@ -70,12 +70,12 @@ class TestClassUserRepository:
         """It should be able to get a user by the user id"""
 
         person_data = PersonData(
-            tax_id_number=faker.word(),
+            tax_id_number=faker.ssn(),
             name=faker.name(),
-            neighborhood=faker.word(),
-            province=faker.word(),
-            street=faker.word(),
-            postal_code=faker.word(),
+            neighborhood=faker.city_suffix(),
+            province=faker.city(),
+            street=faker.street_suffix(),
+            postal_code=faker.postalcode(),
         )
 
         person = person_repository.add(person_data)
@@ -116,12 +116,12 @@ class TestClassUserRepository:
         """It should be able to get a user by passing the username"""
 
         person_data = PersonData(
-            tax_id_number=faker.word(),
+            tax_id_number=faker.ssn(),
             name=faker.name(),
-            neighborhood=faker.word(),
-            province=faker.word(),
-            street=faker.word(),
-            postal_code=faker.word(),
+            neighborhood=faker.city_suffix(),
+            province=faker.city(),
+            street=faker.street_suffix(),
+            postal_code=faker.postalcode(),
         )
 
         person = person_repository.add(person_data)
@@ -162,12 +162,12 @@ class TestClassUserRepository:
         """It should be able to get a user by passing the email"""
 
         person_data = PersonData(
-            tax_id_number=faker.word(),
+            tax_id_number=faker.ssn(),
             name=faker.name(),
-            neighborhood=faker.word(),
-            province=faker.word(),
-            street=faker.word(),
-            postal_code=faker.word(),
+            neighborhood=faker.city_suffix(),
+            province=faker.city(),
+            street=faker.street_suffix(),
+            postal_code=faker.postalcode(),
         )
 
         person = person_repository.add(person_data)

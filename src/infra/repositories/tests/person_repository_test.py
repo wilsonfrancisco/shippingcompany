@@ -17,12 +17,12 @@ class TestClassPersonRepository:
         """It should be able to add a person"""
 
         data = PersonData(
-            tax_id_number=faker.word(),
+            tax_id_number=faker.ssn(),
             name=faker.name(),
-            neighborhood=faker.word(),
-            province=faker.word(),
-            street=faker.word(),
-            postal_code=faker.word(),
+            neighborhood=faker.city_suffix(),
+            province=faker.city(),
+            street=faker.street_suffix(),
+            postal_code=faker.postalcode(),
         )
 
         engine = db_connection_handler.get_engine()
@@ -62,12 +62,12 @@ class TestClassPersonRepository:
         """It should be able to get a person by it tax id number"""
 
         data = PersonData(
-            tax_id_number=faker.word(),
+            tax_id_number=faker.ssn(),
             name=faker.name(),
-            neighborhood=faker.word(),
-            province=faker.word(),
-            street=faker.word(),
-            postal_code=faker.word(),
+            neighborhood=faker.city_suffix(),
+            province=faker.city(),
+            street=faker.street_suffix(),
+            postal_code=faker.postalcode(),
         )
 
         engine = db_connection_handler.get_engine()
@@ -100,30 +100,30 @@ class TestClassPersonRepository:
         """It should be able to get all people in the database"""
 
         fst_person = PersonData(
-            tax_id_number=faker.word(),
+            tax_id_number=faker.ssn(),
             name=faker.name(),
-            neighborhood=faker.word(),
-            province=faker.word(),
-            street=faker.word(),
-            postal_code=faker.word(),
+            neighborhood=faker.city_suffix(),
+            province=faker.city(),
+            street=faker.street_suffix(),
+            postal_code=faker.postalcode(),
         )
 
         snd_person = PersonData(
-            tax_id_number=faker.word(),
+            tax_id_number=faker.ssn(),
             name=faker.name(),
-            neighborhood=faker.word(),
-            province=faker.word(),
-            street=faker.word(),
-            postal_code=faker.word(),
+            neighborhood=faker.city_suffix(),
+            province=faker.city(),
+            street=faker.street_suffix(),
+            postal_code=faker.postalcode(),
         )
 
         thrd_person = PersonData(
-            tax_id_number=faker.word(),
+            tax_id_number=faker.ssn(),
             name=faker.name(),
-            neighborhood=faker.word(),
-            province=faker.word(),
-            street=faker.word(),
-            postal_code=faker.word(),
+            neighborhood=faker.city_suffix(),
+            province=faker.city(),
+            street=faker.street_suffix(),
+            postal_code=faker.postalcode(),
         )
 
         engine = db_connection_handler.get_engine()
