@@ -15,7 +15,7 @@ class User(Base):
     person_tax_id = Column(String(14), ForeignKey("people.tax_id_number"))
     person = relationship("Person", back_populates="user_id")
 
-    def __rep__(self):
+    def __repr__(self):
         return f"Usr: [username={self.username}, tax_id_number={self.person}]"
 
     def __eq__(self, other):

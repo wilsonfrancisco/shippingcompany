@@ -16,7 +16,7 @@ class Person(Base):
     postal_code = Column(String(10), nullable=False)
     user_id = relationship("User", uselist=False, back_populates="person")
 
-    def __rep__(self):
+    def __repr__(self):
         return f"Person: [name={self.name}]"
 
     def __eq__(self, other):
