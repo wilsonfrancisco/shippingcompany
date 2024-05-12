@@ -5,7 +5,7 @@ from src.domain.use_cases import RegisterPerson as RegisterPersonInterface
 
 
 class RegisterPerson(RegisterPersonInterface):
-    """Class to define usecase: Register Person"""
+    """Class to implement the usecase: Register Person"""
 
     def __init__(self, person_repository: Type[PersonRepositoryInterface]):
         self.person_repository = person_repository

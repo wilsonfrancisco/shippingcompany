@@ -5,7 +5,7 @@ from src.domain.models import Person, PersonData
 
 
 class RegisterPerson(ABC):
-    """Register user use case interface"""
+    """Register person use case interface"""
 
     @abstractmethod
     def execute(self, data: PersonData) -> Dict[bool, Person]:
