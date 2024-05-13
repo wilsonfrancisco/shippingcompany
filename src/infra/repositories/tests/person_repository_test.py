@@ -2,7 +2,7 @@ from faker import Faker
 from sqlalchemy import text
 
 from src.infra.config import DBConnectionHandler
-from src.domain.models import PersonData
+from src.domain.test import mock_person
 from ..person_repository import PersonRepository
 
 faker = Faker()
@@ -16,14 +16,7 @@ class TestClassPersonRepository:
     def test_add(self):
         """It should be able to add a person"""
 
-        data = PersonData(
-            tax_id_number=faker.ssn(),
-            name=faker.name(),
-            neighborhood=faker.city_suffix(),
-            province=faker.street_suffix(),
-            street=faker.street_suffix(),
-            postal_code=faker.postalcode(),
-        )
+        data = mock_person()
 
         engine = db_connection_handler.get_engine()
 
@@ -61,14 +54,7 @@ class TestClassPersonRepository:
     def test_get_by_taxt_id_number(self):
         """It should be able to get a person by it tax id number"""
 
-        data = PersonData(
-            tax_id_number=faker.ssn(),
-            name=faker.name(),
-            neighborhood=faker.city_suffix(),
-            province=faker.street_suffix(),
-            street=faker.street_suffix(),
-            postal_code=faker.postalcode(),
-        )
+        data = mock_person()
 
         engine = db_connection_handler.get_engine()
 
@@ -99,32 +85,11 @@ class TestClassPersonRepository:
     def test_get_all(self):
         """It should be able to get all people in the database"""
 
-        fst_person = PersonData(
-            tax_id_number=faker.ssn(),
-            name=faker.name(),
-            neighborhood=faker.city_suffix(),
-            province=faker.street_suffix(),
-            street=faker.street_suffix(),
-            postal_code=faker.postalcode(),
-        )
+        fst_person = mock_person()
 
-        snd_person = PersonData(
-            tax_id_number=faker.ssn(),
-            name=faker.name(),
-            neighborhood=faker.city_suffix(),
-            province=faker.street_suffix(),
-            street=faker.street_suffix(),
-            postal_code=faker.postalcode(),
-        )
+        snd_person = mock_person()
 
-        thrd_person = PersonData(
-            tax_id_number=faker.ssn(),
-            name=faker.name(),
-            neighborhood=faker.city_suffix(),
-            province=faker.street_suffix(),
-            street=faker.street_suffix(),
-            postal_code=faker.postalcode(),
-        )
+        thrd_person = mock_person()
 
         engine = db_connection_handler.get_engine()
 
