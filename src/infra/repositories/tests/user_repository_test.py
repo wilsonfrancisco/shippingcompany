@@ -2,7 +2,7 @@ from faker import Faker
 from sqlalchemy import text
 
 from src.infra.config import DBConnectionHandler
-from src.domain.models import UserData, PersonData
+from src.domain.test import mock_person, mock_user
 from ..user_repository import UserRepository
 from ..person_repository import PersonRepository
 
@@ -19,23 +19,12 @@ class TestClassUserRepository:
     def test_add(self):
         """It should be able to add a user"""
 
-        person_data = PersonData(
-            tax_id_number=faker.ssn(),
-            name=faker.name(),
-            neighborhood=faker.city_suffix(),
-            province=faker.city(),
-            street=faker.street_suffix(),
-            postal_code=faker.postalcode(),
-        )
+        person_data = mock_person()
 
         person = person_repository.add(person_data)
 
-        data = UserData(
-            email=faker.email(),
-            password=faker.word(),
-            username=faker.name(),
-            person_tax_id=person.tax_id_number,
-        )
+        data = mock_user()
+        data.person_tax_id = person.tax_id_number
 
         engine = db_connection_handler.get_engine()
 
@@ -69,23 +58,12 @@ class TestClassUserRepository:
     def test_get_by_id(self):
         """It should be able to get a user by the user id"""
 
-        person_data = PersonData(
-            tax_id_number=faker.ssn(),
-            name=faker.name(),
-            neighborhood=faker.city_suffix(),
-            province=faker.city(),
-            street=faker.street_suffix(),
-            postal_code=faker.postalcode(),
-        )
+        person_data = mock_person()
 
         person = person_repository.add(person_data)
 
-        user_data = UserData(
-            email=faker.email(),
-            password=faker.word(),
-            username=faker.name(),
-            person_tax_id=person.tax_id_number,
-        )
+        user_data = mock_user()
+        user_data.person_tax_id = person.tax_id_number
 
         engine = db_connection_handler.get_engine()
 
@@ -115,23 +93,12 @@ class TestClassUserRepository:
     def test_get_by_username(self):
         """It should be able to get a user by passing the username"""
 
-        person_data = PersonData(
-            tax_id_number=faker.ssn(),
-            name=faker.name(),
-            neighborhood=faker.city_suffix(),
-            province=faker.city(),
-            street=faker.street_suffix(),
-            postal_code=faker.postalcode(),
-        )
+        person_data = mock_person()
 
         person = person_repository.add(person_data)
 
-        user_data = UserData(
-            email=faker.email(),
-            password=faker.word(),
-            username=faker.name(),
-            person_tax_id=person.tax_id_number,
-        )
+        user_data = mock_user()
+        user_data.person_tax_id = person.tax_id_number
 
         engine = db_connection_handler.get_engine()
 
@@ -161,23 +128,12 @@ class TestClassUserRepository:
     def test_get_by_email(self):
         """It should be able to get a user by passing the email"""
 
-        person_data = PersonData(
-            tax_id_number=faker.ssn(),
-            name=faker.name(),
-            neighborhood=faker.city_suffix(),
-            province=faker.city(),
-            street=faker.street_suffix(),
-            postal_code=faker.postalcode(),
-        )
+        person_data = mock_person()
 
         person = person_repository.add(person_data)
 
-        user_data = UserData(
-            email=faker.email(),
-            password=faker.word(),
-            username=faker.name(),
-            person_tax_id=person.tax_id_number,
-        )
+        user_data = mock_user()
+        user_data.person_tax_id = person.tax_id_number
 
         engine = db_connection_handler.get_engine()
 
@@ -207,39 +163,20 @@ class TestClassUserRepository:
     def test_get_all(self):
         """It should be able to get all users in the database"""
 
-        person = PersonData(
-            tax_id_number=faker.ssn(),
-            name=faker.name(),
-            neighborhood=faker.city_suffix(),
-            province=faker.city(),
-            street=faker.street_suffix(),
-            postal_code=faker.postalcode(),
-        )
+        person_data = mock_person()
 
-        fst_user = UserData(
-            email=faker.email(),
-            person_tax_id=person.tax_id_number,
-            password=faker.word(),
-            username=faker.name(),
-        )
+        person = person_repository.add(person_data)
 
-        snd_user = UserData(
-            email=faker.email(),
-            person_tax_id=person.tax_id_number,
-            password=faker.word(),
-            username=faker.name(),
-        )
+        fst_user = mock_user()
+        fst_user.person_tax_id = person.tax_id_number
 
-        thrd_user = UserData(
-            email=faker.email(),
-            person_tax_id=person.tax_id_number,
-            password=faker.word(),
-            username=faker.name(),
-        )
+        snd_user = mock_user()
+        snd_user.person_tax_id = person.tax_id_number
+
+        thrd_user = mock_user()
+        thrd_user.person_tax_id = person.tax_id_number
 
         engine = db_connection_handler.get_engine()
-
-        person_repository.add(person)
 
         fst_user = user_repository.add(fst_user)
         snd_user = user_repository.add(snd_user)
