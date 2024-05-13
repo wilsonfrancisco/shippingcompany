@@ -203,3 +203,76 @@ class TestClassUserRepository:
                 raise
             finally:
                 connection.close()
+
+    def test_get_all(self):
+        """It should be able to get all users in the database"""
+
+        person = PersonData(
+            tax_id_number=faker.ssn(),
+            name=faker.name(),
+            neighborhood=faker.city_suffix(),
+            province=faker.city(),
+            street=faker.street_suffix(),
+            postal_code=faker.postalcode(),
+        )
+
+        fst_user = UserData(
+            email=faker.email(),
+            person_tax_id=person.tax_id_number,
+            password=faker.word(),
+            username=faker.name(),
+        )
+
+        snd_user = UserData(
+            email=faker.email(),
+            person_tax_id=person.tax_id_number,
+            password=faker.word(),
+            username=faker.name(),
+        )
+
+        thrd_user = UserData(
+            email=faker.email(),
+            person_tax_id=person.tax_id_number,
+            password=faker.word(),
+            username=faker.name(),
+        )
+
+        engine = db_connection_handler.get_engine()
+
+        person_repository.add(person)
+
+        fst_user = user_repository.add(fst_user)
+        snd_user = user_repository.add(snd_user)
+        thrd_user = user_repository.add(thrd_user)
+
+        number_of_added_users = 3
+
+        try:
+            with engine.connect() as connection:
+                users = user_repository.get_all()
+
+                connection.execute(
+                    text(
+                        f"""
+                        DELETE FROM users
+                        WHERE id
+                        IN ('{fst_user.id}', '{snd_user.id}', '{thrd_user.id}')
+                      """
+                    )
+                )
+
+                connection.execute(
+                    text(
+                        f"DELETE FROM people WHERE tax_id_number = '{person.tax_id_number}'"
+                    )
+                )
+
+                connection.commit()
+
+                assert users is not None
+                assert len(users) >= number_of_added_users
+        except:
+            connection.rollback()
+            raise
+        finally:
+            connection.close()

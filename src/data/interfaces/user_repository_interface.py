@@ -44,3 +44,8 @@ class UserRepositoryInterface(ABC):
         :return: A user entity
         """
         raise NotImplementedError("Method not implemented")
+
+    @abstractmethod
+    def get_all(self) -> User:
+        """Get all users"""
+        raise NotImplementedError("Method not implemented")

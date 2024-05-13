@@ -122,3 +122,16 @@ class UserRepository(UserRepositoryInterface):
                 raise
             finally:
                 db_connection.session.close()
+
+    def get_all(self) -> UserModel:
+        """Get all users"""
+        try:
+            with DBConnectionHandler() as db_connection:
+                data = db_connection.session.query(User).all()
+
+            return data
+        except:
+            db_connection.session.rollback()
+            raise
+        finally:
+            db_connection.session.close()

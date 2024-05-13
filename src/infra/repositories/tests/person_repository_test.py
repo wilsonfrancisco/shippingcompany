@@ -20,7 +20,7 @@ class TestClassPersonRepository:
             tax_id_number=faker.ssn(),
             name=faker.name(),
             neighborhood=faker.city_suffix(),
-            province=faker.city(),
+            province=faker.street_suffix(),
             street=faker.street_suffix(),
             postal_code=faker.postalcode(),
         )
@@ -65,7 +65,7 @@ class TestClassPersonRepository:
             tax_id_number=faker.ssn(),
             name=faker.name(),
             neighborhood=faker.city_suffix(),
-            province=faker.city(),
+            province=faker.street_suffix(),
             street=faker.street_suffix(),
             postal_code=faker.postalcode(),
         )
@@ -103,7 +103,7 @@ class TestClassPersonRepository:
             tax_id_number=faker.ssn(),
             name=faker.name(),
             neighborhood=faker.city_suffix(),
-            province=faker.city(),
+            province=faker.street_suffix(),
             street=faker.street_suffix(),
             postal_code=faker.postalcode(),
         )
@@ -112,7 +112,7 @@ class TestClassPersonRepository:
             tax_id_number=faker.ssn(),
             name=faker.name(),
             neighborhood=faker.city_suffix(),
-            province=faker.city(),
+            province=faker.street_suffix(),
             street=faker.street_suffix(),
             postal_code=faker.postalcode(),
         )
@@ -121,7 +121,7 @@ class TestClassPersonRepository:
             tax_id_number=faker.ssn(),
             name=faker.name(),
             neighborhood=faker.city_suffix(),
-            province=faker.city(),
+            province=faker.street_suffix(),
             street=faker.street_suffix(),
             postal_code=faker.postalcode(),
         )

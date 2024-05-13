@@ -31,7 +31,7 @@ class RegisterUser(RegisterUserInterface):
 
         founded_person = self.__find_person(data.person_tax_id)
 
-        is_valid_data = is_valid_entry and founded_person
+        is_valid_data = is_valid_entry and founded_person is not None
 
         if is_valid_data:
             response = self.user_repository.add(data)
