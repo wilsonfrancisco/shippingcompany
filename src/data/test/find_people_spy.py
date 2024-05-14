@@ -11,11 +11,17 @@ class FindPeopleSpy:
         self.person_repository = person_repository
         self.find_people_params = {}
 
-    def execute(self, tax_id_number: str) -> Dict[bool, List[Person]]:
+    def execute(self, tax_id_number: str = None) -> Dict[bool, List[Person]]:
         """Spy all the attributes in the execute method"""
 
-        self.find_people_params["tax_id_number"] = tax_id_number
         response = None
+
+        if tax_id_number is None:
+            response = self.person_repository.get_all()
+
+            return {"success": True, "data": response}
+
+        self.find_people_params["tax_id_number"] = tax_id_number
 
         is_valid_entry = isinstance(tax_id_number, str)
 

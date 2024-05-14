@@ -19,10 +19,10 @@ class FindPeopleController:
             query_string_params = http_request.query.keys()
 
             if "tax_id_number" in query_string_params:
-                tax_id_number = http_request.param["tax_id_number"]
+                tax_id_number = http_request.query["tax_id_number"]
                 response = self.find_people.execute(tax_id_number)
 
-            elif "tax_id_number" not in query_string_params:
+            elif "all" in query_string_params:
                 response = self.find_people.execute()
 
             else:
