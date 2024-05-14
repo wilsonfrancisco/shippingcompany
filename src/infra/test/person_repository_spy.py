@@ -30,4 +30,4 @@ class PersonRepositorySpy:
 
     def get_all(self):
         """Spy all the attributes in the get_all method"""
-        return [mock_person()]
+        return [mock_person(), mock_person(), mock_person()]
