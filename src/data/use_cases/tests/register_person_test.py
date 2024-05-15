@@ -41,7 +41,7 @@ class TestClassRegisterPerson:
             user_repository.add_person_params["postal_code"] == attributes.postal_code
         )
 
-        assert response["sucess"] is True
+        assert response["success"] is True
         assert response["data"] is not None
 
     def test_person_register_fail(self):
@@ -63,5 +63,5 @@ class TestClassRegisterPerson:
 
         assert not (user_repository.add_person_params)
 
-        assert response["sucess"] is False
+        assert response["success"] is False
         assert response["data"] is None

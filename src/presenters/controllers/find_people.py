@@ -1,5 +1,5 @@
 from typing import Type
-from src.domain.use_cases import FindPeople
+from src.domain.use_cases import FindPeople as FindPeopleUsecase
 from src.presenters.helpers import HttpResponse, HttpRequest
 from src.presenters.errors import HttpErrors
 
@@ -7,7 +7,7 @@ from src.presenters.errors import HttpErrors
 class FindPeopleController:
     """Find person controller representation to handle http requests"""
 
-    def __init__(self, find_people: Type[FindPeople]) -> None:
+    def __init__(self, find_people: Type[FindPeopleUsecase]) -> None:
         self.find_people = find_people
 
     def handle(self, http_request: Type[HttpRequest]) -> HttpResponse:
