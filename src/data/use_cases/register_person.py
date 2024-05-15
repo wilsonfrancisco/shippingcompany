@@ -30,4 +30,4 @@ class RegisterPerson(RegisterPersonInterface):
         if is_valid_entry:
             response = self.person_repository.add(data)
 
-        return {"sucess": is_valid_entry, "data": response}
+        return {"success": is_valid_entry, "data": response}

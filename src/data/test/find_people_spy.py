@@ -21,9 +21,9 @@ class FindPeopleSpy:
 
             return {"success": True, "data": response}
 
-        self.find_people_params["tax_id_number"] = tax_id_number
-
         is_valid_entry = isinstance(tax_id_number, str)
+
+        self.find_people_params["tax_id_number"] = tax_id_number
 
         if is_valid_entry:
             response = [mock_person()]
