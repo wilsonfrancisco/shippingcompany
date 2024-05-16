@@ -1,5 +1,5 @@
 from typing import Type, Dict
-from src.domain.models import User, UserData, Person
+from src.domain.models import User, UserData
 from src.domain.use_cases import RegisterUser as RegisterUserInterface
 from src.data.interfaces import UserRepositoryInterface
 from src.domain.use_cases import FindPeople
@@ -38,7 +38,7 @@ class RegisterUser(RegisterUserInterface):
 
         return {"success": is_valid_data, "data": response}
 
-    def __find_person(self, tax_id_number: str) -> Person:
+    def __find_person(self, tax_id_number: str):
         """Find the person with the provided tax_id_number
         :param - tax_id_number: The tax id number of an existing person in the repository
         :return - An instance of Person
