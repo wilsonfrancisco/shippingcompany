@@ -1,2 +1,3 @@
 from .find_people import FindPeopleController
 from .register_person import RegisterPersonController
+from .register_user import RegisterUserController
