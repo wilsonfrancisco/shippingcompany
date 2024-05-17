@@ -1,0 +1,1 @@
+from .register_person_composite import register_person_composer
