@@ -3,9 +3,10 @@ from src.domain.models import PersonData
 from src.domain.use_cases import RegisterPerson as RegisterPersonUsecase
 from src.presenters.helpers import HttpRequest, HttpResponse
 from src.presenters.errors import HttpErrors
+from src.main.interfaces import RouteInterface
 
 
-class RegisterPersonController:
+class RegisterPersonController(RouteInterface):
     """Class to handle http requests to register a new person"""
 
     def __init__(self, register_person: Type[RegisterPersonUsecase]) -> None:

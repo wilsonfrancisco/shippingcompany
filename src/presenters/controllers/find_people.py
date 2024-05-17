@@ -2,9 +2,10 @@ from typing import Type
 from src.domain.use_cases import FindPeople as FindPeopleUsecase
 from src.presenters.helpers import HttpResponse, HttpRequest
 from src.presenters.errors import HttpErrors
+from src.main.interfaces import RouteInterface
 
 
-class FindPeopleController:
+class FindPeopleController(RouteInterface):
     """Find person controller representation to handle http requests"""
 
     def __init__(self, find_people: Type[FindPeopleUsecase]) -> None:
